@@ -1,2 +1,6 @@
-<h1>{{title}}</h1>
-<app-meals></app-meals>
+<h1 id="main-content-header">{{title}}</h1>
+<nav>
+  <a routerLink="/meals">Meals</a>
+</nav>
+<router-outlet></router-outlet>
+<app-messages></app-messages>

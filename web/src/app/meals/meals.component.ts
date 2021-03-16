@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Meal } from '../meal';
-// import { MEALS } from '../mock-meals';
 import { MealService } from '../meal.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-meals',
@@ -12,22 +12,20 @@ export class MealsComponent implements OnInit {
 
   meals: Meal[] = [];
 
-  meal: Meal = {
-    id: 1,
-    name: 'Mac & Cheese'
-  };
-
   selectedMeal?: Meal;
-  onSelect(meal: Meal): void {
-    this.selectedMeal = meal;
-  }
 
   // Reserve constructor for minimal initialization
-  constructor(private mealService: MealService) { }
+  constructor(private mealService: MealService,
+              private messageService: MessageService) { }
 
   // Called after Angular constructs the instance
-  ngOnInit(): void {
+  ngOnInit() {
     this.getMeals();
+  }
+
+  onSelect(meal: Meal): void {
+    this.selectedMeal = meal;
+    this.messageService.add(`MealsComponent: Selected meal id=${meal.id}`);
   }
 
   getMeals(): void {
